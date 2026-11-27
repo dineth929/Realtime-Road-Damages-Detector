@@ -38,8 +38,7 @@ Every confirmed damage is saved together with its GPS position, severity and a p
 ```
 road-damage-detector/
 ├── app.py                  # Flask server, detection loop, voice, API
-├── .env.example            # template for your camera settings
-├── .env                    # your own settings (copy from .env.example, not uploaded to GitHub)
+├── .env                    # your own settings
 ├── .gitignore
 ├── logs/                   # logs files (train_logs, pinout and  Credits and Acknowledgements)
 ├── requirements.txt        # works on Windows and Linux / Raspberry Pi
