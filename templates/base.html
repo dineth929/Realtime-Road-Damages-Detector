@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Road Damage Detector{% endblock %}</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('index') }}">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3 4 21M16 3l4 18M12 5v3M12 11v3M12 17v3"/></svg>
+      <span>Road Damage Detector</span>
+    </a>
+    <nav>
+      <a href="{{ url_for('index') }}" class="{{ 'active' if request.endpoint == 'index' }}">Live</a>
+      <a href="{{ url_for('map_page') }}" class="{{ 'active' if request.endpoint == 'map_page' }}">Map &amp; Records</a>
+    </nav>
+    <div class="topbar-right">{% block topbar_right %}{% endblock %}</div>
+  </header>
+  {% block content %}{% endblock %}
+  <script src="{{ url_for('static', filename='js/common.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

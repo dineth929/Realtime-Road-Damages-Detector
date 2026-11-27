@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block topbar_right %}
+  {% if sim %}<span class="chip warn">Simulation</span>{% endif %}
+  <span class="chip" id="gpsChip"><i class="dot"></i><span id="gpsText">GPS: searching…</span></span>
+  <span class="chip"><b id="speed">–</b>&nbsp;km/h</span>
+{% endblock %}
+
+{% block content %}
+<main class="layout">
+  <section class="video" aria-label="Live camera">
+    <img id="videofeed" src="{{ url_for('video_feed') }}" alt="Live road camera with detections">
+    <span class="badge badge-live"><i class="dot"></i>LIVE</span>
+    <span class="badge badge-fps"><b id="fps">0.0</b>&nbsp;FPS</span>
+    <div id="alert" class="alert" role="alert" aria-live="assertive"></div>
+    <div id="offline" class="offline" hidden>Camera stream unavailable – reconnecting…</div>
+  </section>
+
+  <aside class="side">
+    <div class="card">
+      <h2>Detection</h2>
+      <div class="seg" id="filter" data-selected="{{ selected }}">
+        <button data-value="option4" aria-pressed="{{ 'true' if selected == 'option4' else 'false' }}">All</button>
+        <button data-value="option3" aria-pressed="{{ 'true' if selected == 'option3' else 'false' }}">Potholes</button>
+        <button data-value="option1" aria-pressed="{{ 'true' if selected == 'option1' else 'false' }}">Cracks</button>
+        <button data-value="option2" aria-pressed="{{ 'true' if selected == 'option2' else 'false' }}">Manholes</button>
+      </div>
+    </div>
+
+    <div class="card switch-row">
+      <div><h2>Voice alerts</h2><small id="voiceText">{{ 'Off' if muted else 'On' }}</small></div>
+      <button id="muteSwitch" class="switch" role="switch" aria-label="Voice alerts"
+              aria-checked="{{ 'false' if muted else 'true' }}"><i></i></button>
+    </div>
+
+    <div class="card">
+      <h2>Damages recorded</h2>
+      <div class="stats">
+        <div class="stat"><b id="stTotal">0</b><span>Total</span></div>
+        <div class="stat t0"><b id="st0">0</b><span>Potholes</span></div>
+        <div class="stat t1"><b id="st1">0</b><span>Cracks</span></div>
+        <div class="stat t2"><b id="st2">0</b><span>Manholes</span></div>
+      </div>
+    </div>
+
+    <div class="card grow">
+      <div class="card-head"><h2>Recent</h2><a href="{{ url_for('map_page') }}">View all</a></div>
+      <ul class="rows" id="recent"></ul>
+      <p class="empty" id="recentEmpty">No damages recorded yet.</p>
+    </div>
+  </aside>
+</main>
+{% endblock %}
+
+{% block scripts %}<script src="{{ url_for('static', filename='js/main.js') }}"></script>{% endblock %}

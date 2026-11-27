@@ -1,0 +1,18 @@
+[Unit]
+Description=Road Damage Detector
+After=network-online.target sound.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=__USER__
+Group=__USER__
+SupplementaryGroups=dialout video audio
+WorkingDirectory=__APP_DIR__
+ExecStart=__PYTHON__ app.py
+Restart=always
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

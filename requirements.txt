@@ -1,0 +1,20 @@
+# Road Damage Detector - Python dependencies
+# One file for Windows AND Linux (Raspberry Pi). Install with:
+#     pip install -r requirements.txt
+# Lines ending in "; sys_platform == ..." are installed only on that system.
+
+# ---- common (Windows + Linux) ----
+flask>=3.0
+python-dotenv>=1.0
+numpy>=1.24
+opencv-python>=4.8          # ultralytics also pulls this in; listed so the app works on its own
+ultralytics>=8.3            # YOLO; installs PyTorch automatically
+
+# ---- Linux / Raspberry Pi only ----
+pyserial>=3.5; sys_platform == "linux"      # reads the NEO-6M GPS on /dev/serial0
+pynmea2>=1.19; sys_platform == "linux"      # parses the GPS NMEA sentences
+ncnn; sys_platform == "linux"               # runtime for the fast exported model (best_ncnn_model/)
+
+# ---- Windows only ----
+# Nothing extra: voice alerts use the built-in Windows MCI, and GPS is simulated (FakeGPS).
+# Linux also needs one SYSTEM package (not pip):  sudo apt install mpg123

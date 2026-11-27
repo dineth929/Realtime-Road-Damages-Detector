@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Map &amp; Records · Road Damage Detector{% endblock %}
+{% block head %}
+  {% if leaflet_local %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/leaflet/leaflet.css') }}">
+  {% else %}
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<main class="map-layout">
+  <aside class="map-side">
+    <div class="card">
+      <div class="card-head"><h2>Filters</h2><small id="count"></small></div>
+      <div class="chips" id="typeChips">
+        <button class="t0" aria-pressed="true" data-cls="0">Pothole</button>
+        <button class="t1" aria-pressed="true" data-cls="1">Crack</button>
+        <button class="t2" aria-pressed="true" data-cls="2">Manhole</button>
+      </div>
+      <label class="field">Severity
+        <select id="sevFilter">
+          <option value="all">All sizes</option><option value="0">Small</option>
+          <option value="1">Medium</option><option value="2">Large</option>
+        </select>
+      </label>
+      <div class="actions">
+        <a class="btn" href="/export.csv">Download CSV</a>
+        <a class="btn" href="/export.geojson">GeoJSON</a>
+      </div>
+    </div>
+    <ul class="rows" id="rows"></ul>
+    <p class="empty" id="empty" hidden>No damages match the filters.</p>
+  </aside>
+  <section id="map" aria-label="Damage map"></section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+  {% if leaflet_local %}
+  <script src="{{ url_for('static', filename='vendor/leaflet/leaflet.js') }}"></script>
+  {% else %}
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  {% endif %}
+  <script src="{{ url_for('static', filename='js/map.js') }}"></script>
+{% endblock %}
