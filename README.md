@@ -11,7 +11,7 @@ Every confirmed damage is saved together with its GPS position, severity and a p
 | ![Demo 1](docs/image1.png) | ![Demo 2](docs/image2.png) |
 | ![Demo 3](docs/image3.png) | ![Demo 4](docs/image4.png) |
 
-https://youtu.be/bg_yWk53aps
+https://youtu.be/NeAMBW2puLE
 
 > **Project status:** developed and tested in simulation mode (simulated GPS) on a PC. The Raspberry Pi setup below follows the official Pi 4 / Pi 5 pinout guides and has not been verified on every hardware combination. Feedback and issue reports from real vehicles are welcome.
 
